@@ -32,4 +32,10 @@ setup(
     extras_require=extras,
     package_dir={"": "src"},
     packages=find_packages("src"),
+    # add console script
+    entry_points={
+        "console_scripts": [
+            "closedai=closedai.cli_main:main",
+        ],
+    },
 )
