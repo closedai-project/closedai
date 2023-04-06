@@ -10,7 +10,8 @@ from fastapi.responses import StreamingResponse
 from . import ChatCompletionInput, CompletionInput, get_pipeline
 
 
-app = FastAPI()
+app = FastAPI(docs_url="/")
+
 
 # This dict will be updated with the desired pipeline on the start of the server
 # from within cli_main.py. The "pipeline" is a simple class that defines the model inference.
