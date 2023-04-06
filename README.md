@@ -4,6 +4,16 @@
 
 `closedai` is a drop-in replacement for `openai`, but only with open models.
 
+## Installation
+
+For now, install locally, as this project is a WIP and PyPi may be out of date.
+
+```
+git clone https://github.com/nateraw/closedai.git
+cd closedai
+pip install -e .
+```
+
 ## Usage
 
 ### Server
