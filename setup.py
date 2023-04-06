@@ -12,7 +12,12 @@ def get_version() -> str:
 
 
 requirements = [
-    "huggingface_hub>=0.12.0",
+    "fastapi>=0.63.0",
+    "pydantic>=1.8.1",
+    "uvicorn[standard]>=0.13.4",
+    "openai",
+    "fire",
+    "packaging>=20.0",
 ]
 
 extras = {}
