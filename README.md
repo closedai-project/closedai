@@ -16,6 +16,8 @@ pip install -e .
 
 ## Usage
 
+The idea is that you will run your own OpenAI-like server with whatever model you want. Once the server is running, you can hit it with `openai` python library (or any other SDK of your choosing) by overriding the api base endpoint with the URL to your running server.
+
 ### Server
 
 In your terminal, run:
