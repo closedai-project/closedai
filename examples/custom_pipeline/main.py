@@ -13,6 +13,11 @@ class MyPipeline(ClosedAIPipeline):
             yield f", and {i} (test)"
             time.sleep(1)
 
+    def generate_chat_completion(self, messages, **kwargs):
+        for i in range(5):
+            yield f", and {i} (test)"
+            time.sleep(1)
+
 
 pipeline = MyPipeline()
 data["pipeline"] = pipeline
