@@ -7,8 +7,7 @@ from typing import Generator
 from fastapi import FastAPI, Request, Response, status
 from fastapi.responses import StreamingResponse
 
-from .pipelines import get_pipeline
-from .schema import ChatCompletionInput, CompletionInput
+from . import ChatCompletionInput, CompletionInput, get_pipeline
 
 
 app = FastAPI()
