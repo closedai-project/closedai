@@ -23,7 +23,7 @@ app = FastAPI(docs_url="/")
 data = {"pipeline": get_pipeline(os.environ.get("CLOSEDAI_PIPELINE", "dummy"))}
 
 
-async def stream_completion_response(pipeline, completion_input: CompletionInput) -> Generator:
+def stream_completion_response(pipeline, completion_input: CompletionInput) -> Generator:
     id = str(uuid.uuid4())
     current_timestamp = int(dt.now().timestamp())
     for text in pipeline.generate_completion(completion_input.prompt):
@@ -84,11 +84,10 @@ async def completions(request: Request, completion_input: CompletionInput):
         )
 
 
-async def stream_chat_response(pipeline, completion_input: ChatCompletionInput):
+def stream_chat_response(pipeline, completion_input: ChatCompletionInput):
     id = str(uuid.uuid4())
     current_timestamp = int(dt.now().timestamp())
     for text in pipeline.generate_chat_completion(completion_input.messages):
-        print(text)
         yield "data: " + json.dumps(
             {
                 "id": id,
