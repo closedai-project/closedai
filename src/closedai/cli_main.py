@@ -7,8 +7,8 @@ def launch_app(host="127.0.0.1", port=8000, reload=True, pipeline_name="dummy", 
     os.environ["CLOSEDAI_PIPELINE"] = pipeline_name
     uvicorn.run(
         "closedai.server:app",
-        host="127.0.0.1",
-        port=8000,
+        host=host,
+        port=port,
         reload=reload,
     )
 
