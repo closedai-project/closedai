@@ -18,6 +18,12 @@ class ClosedAIPipeline:
     def get_completion(self, text, **kwargs):
         return "".join(list(self.generate_completion(text, **kwargs)))
 
+    def generate_chat_completion(self, text, **kwargs):
+        pass
+
+    def get_chat_completion(self, text, **kwargs):
+        return "".join(list(self.generate_completion(text, **kwargs)))
+
 
 class DummyPipeline(ClosedAIPipeline):
     def __init__(self, duration=5):
