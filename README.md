@@ -28,6 +28,13 @@ closedai
 
 You can see the available configuration flags with `closedai --help`.
 
+#### Docker
+
+```
+docker build -t closedai .
+docker run -p 7860:7860
+```
+
 ### Client
 
 If using localhost, you can `from closedai import openai`. If running remotely, for now you can just `import openai` and override `openai.api_base` with your endpoint and openai.api_key with a dummy value.
