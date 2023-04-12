@@ -5,7 +5,7 @@ import sys
 from typing import TYPE_CHECKING
 
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 
 
 _SUBMOD_ATTRS = {
