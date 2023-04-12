@@ -21,7 +21,7 @@ uvicorn main:app --reload --port 8000
 ```python
 from closedai import openai
 
-completion = openai.Completion.create(model='asdf', prompt='hi there, my name is')
+completion = openai.Completion.create(model='my_model', prompt='hi there, my name is')
 # >>> completion.choices[0].text
 # ', and 0 (test), and 1 (test), and 2 (test), and 3 (test), and 4 (test)'
 ```
