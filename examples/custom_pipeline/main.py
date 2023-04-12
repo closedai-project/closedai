@@ -1,7 +1,7 @@
 import time
 
 from closedai import ClosedAIPipeline
-from closedai.server import app, data  # noqa
+from closedai.server import app, register_model  # noqa
 
 
 class MyPipeline(ClosedAIPipeline):
@@ -19,5 +19,4 @@ class MyPipeline(ClosedAIPipeline):
             time.sleep(1)
 
 
-pipeline = MyPipeline()
-data["pipeline"] = pipeline
+register_model("my_model", MyPipeline())

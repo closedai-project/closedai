@@ -1,3 +1,5 @@
+"""Use this script to push your model pipeline example to the Hugging Face Hub."""
+
 from pathlib import Path
 
 from huggingface_hub import create_repo, upload_folder

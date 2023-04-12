@@ -4,7 +4,7 @@ import uuid
 from datetime import datetime as dt
 from typing import Generator
 
-from fastapi import FastAPI, Request, Response, status
+from fastapi import FastAPI, HTTPException, Request, Response, status
 from fastapi.responses import StreamingResponse
 
 from . import ChatCompletionInput, CompletionInput, get_pipeline
@@ -12,15 +12,19 @@ from . import ChatCompletionInput, CompletionInput, get_pipeline
 
 app = FastAPI(docs_url="/")
 
+_pipe_name = os.environ.get("CLOSEDAI_PIPELINE", "dummy")
+_registry = {_pipe_name: get_pipeline(_pipe_name)}
 
-# This dict will be updated with the desired pipeline on the start of the server
-# from within cli_main.py. The "pipeline" is a simple class that defines the model inference.
-# NOTE - this means the "model" key in the CompletionInput schema is not used, as
-# the pipeline (model) is already set. This differs from how OpenAI handles it, where
-# you define the model on every call. We could do that too, but wanted to be careful not to load
-# on each request, as for LLMs, this is time consuming.
-# TODO - handle this more elegantly.
-data = {"pipeline": get_pipeline(os.environ.get("CLOSEDAI_PIPELINE", "dummy"))}
+
+def register_model(model_name: str, pipeline):
+    _registry[model_name] = pipeline
+
+
+def get_model(model_name: str):
+    model = _registry.get(model_name)
+    if model is None:
+        raise ValueError(f"Model {model_name} not found")
+    return model
 
 
 def stream_completion_response(pipeline, completion_input: CompletionInput) -> Generator:
@@ -63,8 +67,12 @@ def get_completion_response(pipeline, completion_input: CompletionInput) -> str:
 
 @app.post("/completions")
 async def completions(request: Request, completion_input: CompletionInput):
-    global data
-    pipeline = data["pipeline"]
+    if completion_input.model not in _registry:
+        raise HTTPException(
+            status_code=404, detail="Model not found. Available models: " + ", ".join(_registry.keys())
+        )
+
+    pipeline = get_model(completion_input.model)
     if completion_input.stream:
         return StreamingResponse(
             stream_completion_response(pipeline, completion_input),
@@ -123,8 +131,12 @@ def get_chat_response(pipeline, completion_input: ChatCompletionInput):
 
 @app.post("/chat/completions")
 async def chat_completions(request: Request, completion_input: ChatCompletionInput):
-    global data
-    pipeline = data["pipeline"]
+    if completion_input.model not in _registry:
+        raise HTTPException(
+            status_code=404, detail="Model not found. Available models: " + ", ".join(_registry.keys())
+        )
+
+    pipeline = get_model(completion_input.model)
     if completion_input.stream:
         return StreamingResponse(
             stream_chat_response(pipeline, completion_input),
@@ -142,3 +154,8 @@ async def chat_completions(request: Request, completion_input: ChatCompletionInp
                 "Content-Type": "application/json",
             },
         )
+
+
+@app.get("/models")
+async def models():
+    return {"models": list(_registry.keys())}
