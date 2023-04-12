@@ -1,11 +1,16 @@
 # Closed AI
 
-⚠️ **This project is in early development is a work in progress.** ⚠️
-
 `closedai` is a drop-in replacement for `openai`, but only with open models.
+
+⚠️ **This project is in early development and is a work in progress.** ⚠️
 
 ## Installation
 
+```
+pip install closedai
+```
+
+## Local Development
 For now, install locally, as this project is a WIP and PyPi may be out of date.
 
 ```
@@ -46,7 +51,7 @@ Then, use it as you normally would...
 ```python
 from closedai import openai
 
-completion = openai.Completion.create(model='asdf', prompt='hi there, my name is', stream=False)
+completion = openai.Completion.create(model='dummy', prompt='hi there, my name is', stream=False)
 print(completion)
 ```
 
@@ -55,7 +60,7 @@ print(completion)
 ```python
 from closedai import openai
 
-completion = openai.Completion.create(model='asdf', prompt='hi there, my name is', stream=True)
+completion = openai.Completion.create(model='dummy', prompt='hi there, my name is', stream=True)
 for new_text in completion:
     print(new_text)
 ```
@@ -66,7 +71,7 @@ for new_text in completion:
 from closedai import openai
 
 completion = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo",
+    model="dummy",
     messages=[
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": "Who won the world series in 2020?"},
@@ -84,7 +89,7 @@ print(completion)
 from closedai import openai
 
 completion = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo",
+    model="dummy",
     messages=[
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": "Who won the world series in 2020?"},
