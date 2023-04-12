@@ -23,6 +23,8 @@ pip install -e .
 
 The idea is that you will run your own OpenAI-like server with whatever model you want. Once the server is running, you can hit it with `openai` python library (or any other SDK of your choosing) by overriding the api base endpoint with the URL to your running server.
 
+To add your own models, check out [this example](https://github.com/closedai-project/closedai/tree/main/examples/custom_pipeline).
+
 ### Server
 
 In your terminal, run:
