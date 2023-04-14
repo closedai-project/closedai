@@ -1,4 +1,4 @@
 git+https://github.com/nateraw/closedai@main#egg=closedai
 transformers
-sentencepiece
-protobuf
+sentencepiece==0.1.*
+protobuf==3.20.*
