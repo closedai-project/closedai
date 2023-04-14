@@ -1,1 +1,3 @@
 git+https://github.com/nateraw/closedai@main#egg=closedai
+transformers
+sentencepiece
