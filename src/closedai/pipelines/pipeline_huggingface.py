@@ -5,7 +5,7 @@ from .pipeline_base import ClosedAIPipeline
 
 
 class HuggingFacePipeline(ClosedAIPipeline):
-    def __init__(self, model=None, tokenizer=None, streamer=None, decode_kwargs=None):
+    def __init__(self, repo_id="gpt2", model=None, tokenizer=None, streamer=None, decode_kwargs=None):
         if is_transformers_available():
             from transformers import AutoModelForCausalLM, AutoTokenizer, TextIteratorStreamer, pipeline
         else:
@@ -13,8 +13,8 @@ class HuggingFacePipeline(ClosedAIPipeline):
                 "HuggingFacePipeline requires transformers to be installed. Please install transformers with `pip install transformers`"
             )
 
-        tokenizer = tokenizer or AutoTokenizer.from_pretrained("gpt2")
-        model = model or AutoModelForCausalLM.from_pretrained("gpt2")
+        tokenizer = tokenizer or AutoTokenizer.from_pretrained(repo_id)
+        model = model or AutoModelForCausalLM.from_pretrained(repo_id)
         self.streamer = streamer or TextIteratorStreamer(tokenizer, skip_prompt=True, **(decode_kwargs or {}))
         self.pipe = pipeline("text-generation", streamer=self.streamer, model=model, tokenizer=tokenizer)
 
