@@ -13,12 +13,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Sync with Hugging Face
+    - name: Sync custom_pipeline with Hugging Face
       uses: nateraw/huggingface-sync-action@v0.0.4
       with:
-        github_repo_id: nateraw/closedai
+        github_repo_id: closedai-project/closedai
         huggingface_repo_id: nateraw/custom-pipeline-server
         repo_type: space
         space_sdk: docker
         subdirectory: examples/custom_pipeline
+        hf_token: ${{ secrets.HF_TOKEN }}
+    - name: Sync llama_huggingface with Hugging Face
+      uses: nateraw/huggingface-sync-action@v0.0.4
+      with:
+        github_repo_id: closedai-project/closedai
+        huggingface_repo_id: nateraw/llama-huggingface-server
+        repo_type: space
+        space_sdk: docker
+        subdirectory: examples/llama_huggingface
         hf_token: ${{ secrets.HF_TOKEN }}
