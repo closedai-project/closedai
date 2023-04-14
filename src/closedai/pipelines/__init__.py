@@ -18,6 +18,10 @@ if is_transformers_available():
 
 # TODO - load from custom pipeline file
 def get_pipeline(name, **kwargs):
+    if name.startswith("huggingface") and ":" in name:
+        name, repo_id = name.split(":")
+        kwargs["repo_id"] = repo_id
+
     if name in AVAILABLE_PIPELINES:
         return AVAILABLE_PIPELINES[name](**kwargs)
     else:
