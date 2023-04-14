@@ -22,15 +22,13 @@ closedai --pipeline_name huggingface:zpn/llama-7b
 from closedai import openai
 
 completion = openai.Completion.create(model='huggingface:zpn/llama-7b', prompt='hi there, my name is')
-# >>> completion.choices[0].text
-# ', and 0 (test), and 1 (test), and 2 (test), and 3 (test), and 4 (test)'
 ```
 
-Or, if you want to use the hosted one:
+Or, if you want to use the [hosted one](https://nateraw-llama-huggingface-server.hf.space) (which is using a tiny model), you can do:
 
 ```python
 from closedai import openai
 
-openai.api_base = 'https://nateraw-llama-huggingface.hf.space'
-completion = openai.Completion.create(model='huggingface:zpn/llama-7b', prompt='hi there, my name is')
+openai.api_base = 'https://nateraw-llama-huggingface-server.hf.space'
+completion = openai.Completion.create(model='huggingface:HuggingFaceM4/tiny-random-LlamaForCausalLM', prompt='hi there, my name is')
 ```

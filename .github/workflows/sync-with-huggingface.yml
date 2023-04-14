@@ -9,6 +9,9 @@ on:
       - examples/custom_pipeline/**
       - examples/llama_huggingface/**
       - src/**
+    paths-ignore:
+      - examples/custom_pipeline/README.md
+      - examples/llama_huggingface/README.md
 
 jobs:
   build:
