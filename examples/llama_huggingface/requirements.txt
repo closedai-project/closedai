@@ -2,3 +2,4 @@ git+https://github.com/nateraw/closedai@main#egg=closedai
 transformers
 sentencepiece==0.1.*
 protobuf==3.20.*
+torch
