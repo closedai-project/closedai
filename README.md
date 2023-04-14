@@ -35,6 +35,14 @@ closedai
 
 You can see the available configuration flags with `closedai --help`.
 
+One that you might want to use it `--pipeline_name`, which lets you specify a pipeline to use. For example, if you want to use the [llama model](https://huggingface.co/zpn/llama-7b), you can run:
+
+```
+closedai --pipeline_name huggingface:zpn/llama-7b
+```
+
+The syntax for the huggingface pipeline is `huggingface:<model_name>`. For a smaller, dummy model, you can use `huggingface:HuggingFaceM4/tiny-random-LlamaForCausalLM`. Check out the [example](https://github.com/closedai-project/closedai/tree/main/examples/llama_huggingface) for more details.
+
 #### Docker
 
 ```
