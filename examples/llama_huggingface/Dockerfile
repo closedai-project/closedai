@@ -24,4 +24,5 @@ WORKDIR $HOME/app
 # Copy the current directory contents into the container at $HOME/app setting the owner to the user
 COPY --chown=user . $HOME/app
 
-CMD ["closedai", "--pipeline_name", "huggingface:zpn/llama-7b", "--host", "0.0.0.0", "--port", "7860"]
+# CMD ["closedai", "--pipeline_name", "huggingface:zpn/llama-7b", "--host", "0.0.0.0", "--port", "7860"]
+CMD ["closedai", "--pipeline_name", "huggingface:zpn/HuggingFaceM4/tiny-random-LlamaForCausalLM", "--host", "0.0.0.0", "--port", "7860"]
