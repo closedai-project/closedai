@@ -2,6 +2,7 @@ from ..runtime import is_transformers_available
 
 # from .pipeline_base import ClosedAIPipeline
 from .pipeline_dummy import DummyPipeline
+from .pipeline_mpt import MPTPipeline
 
 
 # TODO - use strings here and load module
@@ -14,11 +15,15 @@ if is_transformers_available():
     from .pipeline_huggingface import HuggingFacePipeline
 
     AVAILABLE_PIPELINES["huggingface"] = HuggingFacePipeline
+    AVAILABLE_PIPELINES["mpt"] = MPTPipeline
 
 
 # TODO - load from custom pipeline file
 def get_pipeline(name, **kwargs):
     if name.startswith("huggingface") and ":" in name:
+        name, repo_id = name.split(":")
+        kwargs["repo_id"] = repo_id
+    if name.startswith("mpt") and ":" in name:
         name, repo_id = name.split(":")
         kwargs["repo_id"] = repo_id
 
