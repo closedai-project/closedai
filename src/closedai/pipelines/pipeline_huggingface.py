@@ -14,7 +14,8 @@ class HuggingFacePipeline(ClosedAIPipeline):
         use_auth_token=None,
         decode_kwargs=None,
         torch_dtype=None,
-        device_map="auto",
+        device_map=None,
+        device=None,
     ):
         if is_transformers_available():
             from transformers import AutoModelForCausalLM, AutoTokenizer, TextIteratorStreamer, pipeline
@@ -34,6 +35,7 @@ class HuggingFacePipeline(ClosedAIPipeline):
             use_auth_token=use_auth_token,
             device_map=device_map,
             torch_dtype=torch_dtype,
+            device=device,
         )
 
     def generate_completion(self, text, **generate_kwargs):
